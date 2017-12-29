@@ -27,3 +27,5 @@ if __name__ == '__main__':
         else:
             string += x[0]+x[1]
     print(string)
+
+# Compact version : https://github.com/TheMrinalSinha/python-scripts/blob/master/char_counter_1.py
