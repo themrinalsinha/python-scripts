@@ -23,3 +23,8 @@ if __name__ == "__main__":
     process_1.join()
 
     print('Done!')
+
+# When you create a new process it will create a copy of square result,
+# Every process has its own address space (Virtual Memory). Thus program
+# variable as not shared between two process. You need to use interprocess
+# communication (IPC) technique if you want to share data between two process. 
