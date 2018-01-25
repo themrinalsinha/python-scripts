@@ -19,3 +19,27 @@ if __name__ == '__main__':
 # Map --- Distributing input to multiple cores is called map.
 # Reduce -- Aggregiating all the processes results together is call reduce.
 
+print("\n------------MULTIPROCESSING-----------\n")
+
+from multiprocessing import Pool
+import time
+
+def f2(n):
+    sum = 0
+    for x in range(100):
+        sum += x * x
+    return sum
+
+t1 = time.time()
+p = Pool()
+result = p.map(f2, range(1000000))
+p.close()
+p.join()
+print("POOL TOOK : {}".format(time.time() - t1))
+
+t2 = time.time()
+res = []
+for x in range(1000000):
+    result.append(f2(x))
+
+print('Serial processing took : {}'.format(time.time() - t2))
