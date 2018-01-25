@@ -32,14 +32,14 @@ def f2(n):
 
 t1 = time.time()
 p = Pool()
-result = p.map(f2, range(10000000))
+result = p.map(f2, range(1000000))
 p.close()
 p.join()
 print("POOL TOOK : {}".format(time.time() - t1))
 
 t2 = time.time()
 res = []
-for x in range(10000000):
+for x in range(1000000):
     result.append(f2(x))
 
 print('Serial processing took : {}'.format(time.time() - t2))
