@@ -43,3 +43,6 @@ for x in range(1000000):
     result.append(f2(x))
 
 print('Serial processing took : {}'.format(time.time() - t2))
+
+# When you want to limit the number of pools you can do that
+# p = Pool(processes = 3)
