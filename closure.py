@@ -11,7 +11,6 @@ def outer_func():
 x = outer_func()
 x()
 x()
-x()
 
 # ==============================
 import logging
