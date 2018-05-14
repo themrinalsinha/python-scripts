@@ -7,9 +7,7 @@
 #    if max_left < min_right or min_left > max_right
 #        the current chosen substitutions (M = 2 in this example) can not lead to a valid solution.
 
-
 import itertools
-
 
 def get_value(word, substitution):
     s = 0
