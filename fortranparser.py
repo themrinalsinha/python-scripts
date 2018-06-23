@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 class CleanCode(object):
     def __init__(self, txtfile):
         self.txtfile = txtfile
@@ -23,7 +25,7 @@ class ParseFortran(object):
     @property
     def groupkey(self):
         initial     = 0
-        groups      = {}
+        groups      = OrderedDict()
         self.code_w = [x.strip() for x in self.code]
         for initial in range(len(self.keywords()) - 1):
             groups.setdefault(self.keywords()[initial], [])
@@ -33,8 +35,8 @@ class ParseFortran(object):
         return groups
 
     def contentkey(self):
-        contents = {}
-        data     = {}
+        contents = OrderedDict()
+        data     = OrderedDict()
         for keyword in self.keywords()[:-1]:
             contents.setdefault(keyword, [])
             for x in self.groupkey.get(keyword):
