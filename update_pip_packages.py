@@ -5,11 +5,11 @@ from tqdm       import tqdm
 from subprocess import check_output
 
 packages = check_output(['pip3', 'list', '--outdated']).decode("utf-8")
-packages = tqdm([pkg.split(' ')[0] for pkg in packages.split('\n') if pkg])
+packages = tqdm([pkg.split(' ')[0] for pkg in packages.split('\n') if pkg][2:])
 
 for pkg in packages:
     packages.set_description('Updating: {}'.format(pkg))
     try:
-        check_output(['sudo', '-H', 'pip3', 'install', '-Uq', '{}'.format(pkg)])
+        check_output(['python3', '-m', 'pip', 'install', '-Uq', '{}'.format(pkg)])
     except:
         print('{} - failed to update !'.format(pkg))
