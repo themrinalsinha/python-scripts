@@ -4,6 +4,7 @@
 from tqdm       import tqdm
 from subprocess import check_output
 
+# TODO: Supress working in some cases
 packages = check_output(['pip3', 'list', '--outdated']).decode("utf-8")
 packages = tqdm([pkg.split(' ')[0] for pkg in packages.split('\n') if pkg][2:])
 
