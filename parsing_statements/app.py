@@ -1,7 +1,6 @@
 from os   import path
 from csv  import DictReader, DictWriter
 from yaml import load
-from tqdm import tqdm
 
 class ParseCSV(object):
     def __init__(self, infile):
