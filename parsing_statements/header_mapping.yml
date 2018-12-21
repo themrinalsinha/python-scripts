@@ -1,0 +1,17 @@
+DATE:
+  - DATE
+DETAILS:
+  - PARTICULARS
+  - Details
+CHEQUE_NO:
+  - CHQ.NO.
+  - Chq No.
+DEBIT:
+  - WITHDRAWALS
+  - Debit
+CREDIT:
+  - DEPOSITS
+  - Credit
+BALANCE:
+  - BALANCE
+  - Balance
