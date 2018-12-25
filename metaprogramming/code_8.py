@@ -23,3 +23,6 @@ class Stock(Structure):
 
 # x = Stock()
 # import pdb; pdb.set_trace()
+
+# As you can see it is back to original 'simple' solution
+# Signatures are created behind scenes.
