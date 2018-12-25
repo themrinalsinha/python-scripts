@@ -26,3 +26,11 @@ class Stock(Structure):
 
 # As you can see it is back to original 'simple' solution
 # Signatures are created behind scenes.
+
+
+# Advices
+#
+# _> Use a class decorator if the goal is to tweak classes that mght be unrelated.
+# _> Use a metaclass if you're trying to perform actions in combination with inheritance
+# _> Don't be so quick to dismiss techniques (eg: 'metaclasses suck so blah blah..)
+# _> All of the tools are meant to work together.
