@@ -11,4 +11,4 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('hello', help='Use it to say anyting..')
 args = parser.parse_args()
-print('=====', args)
+
