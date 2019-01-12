@@ -11,5 +11,4 @@ total_size = int(r.headers['content-length'])
 with open('pdffile.pdf', 'wb') as f:
     for data in tqdm(iterable=r.iter_content(chunk_size=chunk_size),total=total_size//chunk_size, unit='KB'):
         f.write(data)
-
 print("Download completed !!")
