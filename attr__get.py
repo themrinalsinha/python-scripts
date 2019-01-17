@@ -20,6 +20,6 @@ person = Person_1()
 # When default value is provided.
 print('The sex is : ', getattr(person, 'sex', 'Male'))
 print('The place is : ', getattr(person, 'addr', 'Mumbai'))
-
+print('This is random: ', getattr(person, 'rand', 'random'))
 # When no default value is provided.
 # print('The sex is : ', getattr(person, 'sex'))
