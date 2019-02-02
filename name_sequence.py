@@ -33,6 +33,9 @@ def validate_name(ORIGINAL_NAME, PROVIDED_NAME):
                 return True
     return False
 
+while True:
+    original_name = input('ORIGINAL NAME: ').strip()
+    provided_name = input('PROVIDED NAME: ').strip()
+    print('Match: ', validate_name(original_name, provided_name), end='\n--------------\n')
 
-
-print(validate_name('mrinal vinay sinha', 'mrinal sinha'))
+# print(validate_name('mrinal vinay sinha', 'mrinal sinha'))
