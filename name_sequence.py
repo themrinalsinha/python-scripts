@@ -29,13 +29,27 @@ def validate_name(ORIGINAL_NAME, PROVIDED_NAME):
             _x = ' '.join(initials) +' '+ FAMILY_NAME
             _y = '. '.join(initials) +' '+ FAMILY_NAME
             _z = '. '.join(initials) +'. '+ FAMILY_NAME
-            if PROVIDED_NAME in (_w, _x, _y, _z):
+            _p = FAMILY_NAME +' '+ ''.join(initials)
+            _q = FAMILY_NAME +' '+ ' '.join(initials)
+            _r = FAMILY_NAME +' '+ '. '.join(initials)
+            _s = FAMILY_NAME +'. '+ '. '.join(initials)
+
+            if PROVIDED_NAME in (_w, _x, _y, _z, _p, _q, _r, _s):
                 return True
+
+        for texts in combi:
+            if len(texts) > 1:
+                first_pos  = texts[0][0]
+                remainings = list(texts[1:])
+                remainings.append(first_pos)
+                _w = ' '.join(remainings) +' '+ FAMILY_NAME
+                _x = FAMILY_NAME +' '+ ' '.join(remainings)
+                if PROVIDED_NAME in (_w, _x):
+                    return True
+
     return False
 
+original_name = input('ORIGINAL NAME: ').strip()
 while True:
-    original_name = input('ORIGINAL NAME: ').strip()
     provided_name = input('PROVIDED NAME: ').strip()
     print('Match: ', validate_name(original_name, provided_name), end='\n--------------\n')
-
-# print(validate_name('mrinal vinay sinha', 'mrinal sinha'))
