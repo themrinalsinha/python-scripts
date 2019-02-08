@@ -47,6 +47,14 @@ def validate_name(ORIGINAL_NAME, PROVIDED_NAME):
                 if PROVIDED_NAME in (_w, _x):
                     return True
 
+        for texts in combi:
+            if len(texts) > 1:
+                index = 0
+                while index < len(texts):
+                    position = texts[index][0]
+                    remainings = list(texts[1:])
+
+
     return False
 
 original_name = input('ORIGINAL NAME: ').strip()
