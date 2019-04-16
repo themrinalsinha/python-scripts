@@ -88,3 +88,15 @@ l = [[1, 2, 3], [4, 5, 6]]
 from copy import deepcopy
 l2 = deepcopy(l)
 print(l2)
+
+
+# Sort dictonary by value
+d = {'apple': 1000, 'banana': 201, 'orange': 45, 'tomato': 123}
+# ---- sorting based on value ---- x[1] for value x[0] for key
+print(sorted(d.items(), key=lambda x: x[1]))
+# ---- Sorting using operator.itemgetter as the sort key instead of a lambda ----
+from operator import itemgetter
+# 0 for key and 1 for value
+print(sorted(d.items(), key=itemgetter(1)))
+# ---- sort dict keys by value ----
+print(sorted(d, key=d.get))
