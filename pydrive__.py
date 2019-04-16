@@ -49,3 +49,23 @@ class MergeJSONfromGDrive(object):
             rmtree(join(self.BASE_PATH, 'json_dump'))
 
 MergeJSONfromGDrive('<folder id>').download_and_merge()
+
+
+# # STEPS TO FOLLOW
+
+# Step 1: download the zip file from attachment and extract it.
+
+# Step 2: download the credentials.json file from https://developers.google.com/drive/api/v3/quickstart/python and download credentials.json then rename credentials.json to 'client_secrets.json' and put it into the extracted folder.
+
+# Step 3: In the extracted folder there is a settings.yaml file open it and replace client_id and client_secret with the one you find in client_secrets.json
+
+# Step 4: Now we have to create a virtual machine and install the required packages.
+#     -> Open the extracted folder in cmd or shell.
+#     -> run command: virtualenv -p python3 venv
+#     -> run command: source venv/bin/activate
+#     -> pip install -r requirements.txt
+#     Once u r done with the above steps
+
+# Step 5: In app.py you will see that the last line is commented, uncomment it and replace folder-id with your drives folder id, done!
+
+# run the script for the first time it will open browser to authenticate and also downlaod all the json files from that folder and it will create 'output.json' file with all the merged files
