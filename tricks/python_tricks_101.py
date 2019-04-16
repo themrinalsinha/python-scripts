@@ -137,3 +137,14 @@ def maxIndex(lst):
     return max(range(len(lst)), key=lst.__getitem__)
 print('Min value is at index: ', minIndex(lst))
 print('Max value is at index: ', maxIndex(lst))
+
+
+# Remove duplicates from list
+items = [1, 2, 3, 1, 1, 2, 5, 6]
+print(set(items))
+# --- remove duplicates and keep order ----
+from collections import OrderedDict
+items = ['foo', 'bar', 'bar', 'foo']
+print(set(items))
+from collections import OrderedDict
+print(list(OrderedDict.fromkeys(items).keys()))
