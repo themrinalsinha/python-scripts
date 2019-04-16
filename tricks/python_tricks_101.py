@@ -29,3 +29,12 @@ from collections import Counter
 print(Counter('mrinal'))
 print(Counter('mrinal') == Counter('rnaiml'))
 
+
+# reverse a string
+a = 'abcdefghijklmnopqrstuvwxyz'
+print('reverse is :', a[::-1])
+print(reversed(a))
+for char in reversed(a):
+    print(char)
+num = 123345567688
+print(int(str(num)[::-1]))
