@@ -118,3 +118,12 @@ print(', '.join(items))
 # --- list of numbers to comma seperated ---
 numbers = [6, 4, 2, 1, 8, 0, 2]
 print(', '.join(map(str, numbers)))
+
+
+# Merge dictonaries.
+d1 = {'a': 1, 'b': 2}
+d2 = {'aa': 11, 'bb': 22}
+print({**d1, **d2})
+print(dict(d1.items() | d2.items()))
+d1.update(d2)
+print(d1)
