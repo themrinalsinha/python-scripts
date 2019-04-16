@@ -38,3 +38,9 @@ for char in reversed(a):
     print(char)
 num = 123345567688
 print(int(str(num)[::-1]))
+
+
+# Transpose 2d array
+original = [['a', 'b'], ['c', 'd'], ['e', 'f']]
+transposed = zip(*original)
+print(list(transposed))
