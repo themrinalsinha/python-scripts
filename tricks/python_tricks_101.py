@@ -110,3 +110,11 @@ for elem in a:
         break
 else:
     print('did not break out of for loop')
+
+
+# Convert list to comma seperated
+items = ['foo', 'bar', 'xyz']
+print(', '.join(items))
+# --- list of numbers to comma seperated ---
+numbers = [6, 4, 2, 1, 8, 0, 2]
+print(', '.join(map(str, numbers)))
