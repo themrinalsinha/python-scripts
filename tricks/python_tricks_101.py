@@ -127,3 +127,12 @@ print({**d1, **d2})
 print(dict(d1.items() | d2.items()))
 d1.update(d2)
 print(d1)
+
+
+# MIN and MAX index in list
+lst = [40, 10, 20, 30]
+def minIndex(lst):
+    return min(range(len(lst)), key=lst.__getitem__)
+
+
+print(minIndex(lst))
