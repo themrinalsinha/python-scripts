@@ -21,3 +21,11 @@ from collections import Counter
 cnt = Counter(a)
 print('counter output: ',  cnt)
 print('most frequest in counter: ', cnt.most_common(3))
+
+
+# checking if two words are anagrams
+# anagram = a word, phrase, or name formed by rearranging the letters of another, such as spar, formed from rasp.
+from collections import Counter
+print(Counter('mrinal'))
+print(Counter('mrinal') == Counter('rnaiml'))
+
