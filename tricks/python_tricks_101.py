@@ -44,3 +44,9 @@ print(int(str(num)[::-1]))
 original = [['a', 'b'], ['c', 'd'], ['e', 'f']]
 transposed = zip(*original)
 print(list(transposed))
+
+
+# Chained comparison with all kind of operators
+b = 6
+print(4 < b < 7)
+print(1 == b < 20)
