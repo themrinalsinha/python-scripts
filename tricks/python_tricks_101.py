@@ -133,6 +133,7 @@ print(d1)
 lst = [40, 10, 20, 30]
 def minIndex(lst):
     return min(range(len(lst)), key=lst.__getitem__)
-
-
-print(minIndex(lst))
+def maxIndex(lst):
+    return max(range(len(lst)), key=lst.__getitem__)
+print('Min value is at index: ', minIndex(lst))
+print('Max value is at index: ', maxIndex(lst))
