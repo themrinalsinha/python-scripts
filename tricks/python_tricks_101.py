@@ -50,3 +50,15 @@ print(list(transposed))
 b = 6
 print(4 < b < 7)
 print(1 == b < 20)
+
+
+# chained function call
+# calling different functions with same arguments based on conditions
+def product(a, b):
+    return a * b
+
+def add(a, b):
+    return a + b
+
+b = True
+print((product if b else add)(5, 6))
