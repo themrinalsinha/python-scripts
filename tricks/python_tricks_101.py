@@ -56,9 +56,35 @@ print(1 == b < 20)
 # calling different functions with same arguments based on conditions
 def product(a, b):
     return a * b
-
 def add(a, b):
     return a + b
-
 b = True
 print((product if b else add)(5, 6))
+
+
+# Copying list
+# --- a fast way to make a shallow copy of a list ---
+a = [1, 2, 3, 4, 5]
+print('regular list: ', a)
+b = a
+print('assigning b=a: ', b)
+b[0] = 11
+print('b[0]=11 then A = ', a)
+print('b[0]=11 then B = ', b)
+# --- another way but it will noot affect the main list ---
+b = a[:]
+print('B: ', b)
+print('A: ', a)
+b[0] = 111
+print('B: ', b)
+print('A: ', a)
+# --- copy list by typecasting method ---
+a = [1, 2, 3, 4, 5]
+print(list(a))
+# --- using the list.copy() method ---
+print('copy method ', a.copy())
+# --- copy nested lists using copy.deepcopy ---
+l = [[1, 2, 3], [4, 5, 6]]
+from copy import deepcopy
+l2 = deepcopy(l)
+print(l2)
