@@ -8,7 +8,7 @@ def validate_name(ORIGINAL_NAME, PROVIDED_NAME=None):
     if ORIGINAL_NAME == PROVIDED_NAME:
         return True
 
-    ORIGINAL_NAME       = ORIGINAL_NAME.split(' ')
+    ORIGINAL_NAME       = [x.strip() for x in ORIGINAL_NAME.split(' ') if x]
     FAMILY_NAME         = ORIGINAL_NAME[-1]
     OTHER_NAME          = ORIGINAL_NAME[:-1]
     NAME_COMBINATIONS   = []
@@ -61,14 +61,6 @@ def validate_name(ORIGINAL_NAME, PROVIDED_NAME=None):
 
     return list(set(NAME_COMBINATIONS)) if not PROVIDED_NAME else False
 
-def validate_company_name(ORIGINAL_NAME, PROVIDED_NAME=None):
-    ORIGINAL_NAME = ORIGINAL_NAME.lower()
-    PROVIDED_NAME = PROVIDED_NAME.lower() if PROVIDED_NAME else None
-
-    if ORIGINAL_NAME == PROVIDED_NAME:
-        return True
-
-
 print('Yogita Vipul Sharma - ', 'Yogita Vipul Sharma', ' ==== ', validate_name('Yogita Vipul Sharma', 'Yogita Vipul Sharma'))
 print('Yogita Vipul Sharma - ', 'Yogita Sharma', ' ==== ', validate_name('Yogita Vipul Sharma', 'Yogita Sharma'))
 print('Yogita Vipul Sharma - ', 'Yogita S', ' ==== ', validate_name('Yogita Vipul Sharma', 'Yogita S'))
@@ -82,3 +74,4 @@ print('Yogita Vipul Sharma - ', 'Sharma V Yogita', ' ==== ', validate_name('Yogi
 print('Yogita Vipul Sharma - ', 'Yogita Vipul S', ' ==== ', validate_name('Yogita Vipul Sharma', 'Yogita Vipul S'))
 print('Yogita Vipul Sharma - ', 'Yogita V S', ' ==== ', validate_name('Yogita Vipul Sharma', 'Yogita V S'))
 print('Yogita Vipul Sharma - ', 'Sharma Vipul Y', ' ==== ', validate_name('Yogita Vipul Sharma', 'Sharma Vipul Y'))
+print('Yogita Vipul Sharma - ', 'Yogita Vipul', ' ==== ', validate_name('Yogita Vipul Sharma', 'yogita vipul'))
