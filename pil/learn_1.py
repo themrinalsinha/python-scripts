@@ -80,4 +80,14 @@ img = Image.merge('RGB', (g, b, r))
 # b.show()
 # g.show()
 # img.show()
+# ======================================================
 
+# Geometrical transforms
+# The PIL.Image.Image class contains methods to resize() and rotate() an image.
+
+# simple geometry transforms
+img = Image.open('sample.jpg')
+out_1 = img.resize((512, 256))
+out_2 = img.rotate(45)
+out_1.show()
+out_2.show()
