@@ -116,3 +116,13 @@ img = Image.open('sample.jpg').convert('CMYK')
 # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html
 # https://pillow.readthedocs.io/en/3.1.x/handbook/concepts.html#concept-modes
 # img.show()
+# ========================================================
+
+# Image Enhancements - The python Imaging Library provides a number
+# of methods and modules that can be used to enhance images
+
+# Filters - The ImageFilter module contains a number of pre-defined
+# enhancement filters that can be used with the filter() method
+img = Image.open('sample.jpg')
+out = img.filter(ImageFilter.DETAIL)
+out.show()
