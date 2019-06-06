@@ -50,3 +50,21 @@ img.paste(region, box)
 # region do not need to match.
 img.save('rotate_region.jpg')
 # ====================================================
+
+# Rolling an image
+def roll(image, delta):
+    xsize, ysize = image.size
+    delta = delta % xsize
+    if delta == 0: return image
+
+    part1 = image.crop((0, 0, delta, ysize))
+    part2 = image.crop((delta, 0, xsize, ysize))
+    image.paste(part1, (xsize-delta, 0, xsize, ysize))
+    image.paste(part2, (0, 0, xsize-delta, ysize))
+
+    return image
+
+img = Image.open('sample.jpg')
+img = roll(img, 1000)
+# img.show()
+
