@@ -67,4 +67,17 @@ def roll(image, delta):
 img = Image.open('sample.jpg')
 img = roll(img, 1000)
 # img.show()
+# ======================================================
+
+# Splitting and merging bands
+img = Image.open('sample.jpg')
+r, g, b = img.split()
+# The python Image library also allows you to work with the individual
+# bands of an multi-band image, such as RGB image. The split method crates
+# a set of new images, each containing one band from the original multi-band image.
+img = Image.merge('RGB', (g, b, r))
+# r.show()
+# b.show()
+# g.show()
+# img.show()
 
