@@ -2,7 +2,7 @@
 
 # Using the image class:
 # 'Image' is one of the most important class.
-from PIL import Image
+from PIL import Image, ImageFilter
 
 # To load an image from a file, use the open() function in the Image module.
 img = Image.open('sample.jpg')
@@ -104,3 +104,15 @@ out5 = img.transpose(Image.ROTATE_270)
 # out3.show()
 # out4.show()
 # out5.show()
+# ======================================================
+
+# Color Transforms
+# The python imageing library allows you to convert images between different pixel
+# representation using convert() method.
+
+img = Image.open('sample.jpg').convert('L')
+img = Image.open('sample.jpg').convert('P')
+img = Image.open('sample.jpg').convert('CMYK')
+# https://pillow.readthedocs.io/en/3.1.x/reference/Image.html
+# https://pillow.readthedocs.io/en/3.1.x/handbook/concepts.html#concept-modes
+# img.show()
