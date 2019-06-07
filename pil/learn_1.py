@@ -2,7 +2,7 @@
 
 # Using the image class:
 # 'Image' is one of the most important class.
-from PIL import Image, ImageFilter
+from PIL import Image, ImageFilter, ImageEnhance
 
 # To load an image from a file, use the open() function in the Image module.
 img = Image.open('sample.jpg')
@@ -150,4 +150,14 @@ GG = G.point(lambda i: i * 0.7)
 G.paste(GG, None, RR)
 # build the new multiband image
 img = Image.merge('RGB', (R,G,B))
-img.show()
+# img.show()
+# ========================================================
+
+# Enhancing images - Enhancement
+# for more advanced image enhancement, you can use the classes in the ImageEnhance module.
+# You can adjust contrast, brightness, color balance and sharpness in this way.
+
+img = Image.open('sample.jpg')
+enh = ImageEnhance.Contrast(img)
+# img.show()
+# enh.enhance(1.6).show()
