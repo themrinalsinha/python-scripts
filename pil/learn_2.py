@@ -37,3 +37,18 @@ with open('sample.jpg', 'rb') as fp:
 img = TarIO.TarIO('sample.tar', 'sample.jpg')
 img = Image.open(img)
 # img.show()
+
+# ====================================================
+# controlling the decoder.
+# Some decoders allow you to manipulate the image while reading it from a file. This can often be used to speed up
+# decoding when creating thumbnails (when speed is usually more important thatn quality) and printing to a monochrome
+# laser printer.
+# The draft() method manipulates an opened but not yet loaded image so it as closely as possible matches the given mode and size.
+
+# Reading in draft mode.
+from PIL import Image
+img = Image.open('sample.jpg')
+print('original = ', img.mode, im.size)
+
+img.draft('L', (100, 100))
+print('draft = ', img.mode, img.size)
