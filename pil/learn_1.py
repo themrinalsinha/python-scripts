@@ -138,3 +138,16 @@ out = img.point(lambda i: i * 12)
 # out.show()
 # using the above technique, you can quickly apply any simple expression to an image.
 # you can also combine the point() and paste() methods to selectively modify an image.
+
+# processing individual bands
+img = Image.open('sample.jpg')
+R, G, B = img.split()
+# Select region where red is less than 100
+RR = R.point(lambda i: i < 100 and 255)
+# process the green band
+GG = G.point(lambda i: i * 0.7)
+# paste the processed band back, but only where red was < 100
+G.paste(GG, None, RR)
+# build the new multiband image
+img = Image.merge('RGB', (R,G,B))
+img.show()
