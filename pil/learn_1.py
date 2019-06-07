@@ -125,4 +125,16 @@ img = Image.open('sample.jpg').convert('CMYK')
 # enhancement filters that can be used with the filter() method
 img = Image.open('sample.jpg')
 out = img.filter(ImageFilter.DETAIL)
-out.show()
+# out.show()
+
+# Applying point transforms
+# https://pillow.readthedocs.io/en/stable/handbook/tutorial.html
+# https://pillow.readthedocs.io/en/3.1.x/reference/Image.html
+# https://pillow.readthedocs.io/en/3.1.x/handbook/concepts.html#concept-modes
+
+img = Image.open('sample.jpg')
+# multiply each pixel by 12
+out = img.point(lambda i: i * 12)
+# out.show()
+# using the above technique, you can quickly apply any simple expression to an image.
+# you can also combine the point() and paste() methods to selectively modify an image.
