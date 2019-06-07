@@ -2,7 +2,7 @@
 
 # Using the image class:
 # 'Image' is one of the most important class.
-from PIL import Image, ImageFilter, ImageEnhance
+from PIL import Image, ImageFilter, ImageEnhance, ImageSequence
 
 # To load an image from a file, use the open() function in the Image module.
 img = Image.open('sample.jpg')
@@ -151,6 +151,8 @@ G.paste(GG, None, RR)
 # build the new multiband image
 img = Image.merge('RGB', (R,G,B))
 # img.show()
+# syntax used to create mask is:
+# img = img.out(lambda i: expression and 255)
 # ========================================================
 
 # Enhancing images - Enhancement
@@ -161,3 +163,23 @@ img = Image.open('sample.jpg')
 enh = ImageEnhance.Contrast(img)
 # img.show()
 # enh.enhance(1.6).show()
+# ========================================================
+
+# Image sequences
+# The PIL contains some basic support for image sequences (also called animation formats)
+# Supported sequence formats include FLI/FLC, GIF and a few experimental formats. TIFF files can also contain more than one framesself.
+
+img = Image.open('giphy.gif')
+# img.show()
+# img.seek(1) # skips the second frame
+try:
+    while True:
+        img.seek(img.tell() + 1)
+        # img.show()
+except EOFError:
+    pass
+
+# Using image sequence iterator class.
+for frame in ImageSequence.Iterator(img):
+    # frame.show()
+    frame
