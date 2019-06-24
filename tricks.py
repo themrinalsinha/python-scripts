@@ -48,3 +48,9 @@ print('Process ID: ', os.getpid())
 import sys
 imported_modules = [m.__name__ for m in sys.modules.values() if m]
 print('Imported modules\n', imported_modules, '\n')
+# =================================
+name  = ['a', 'b', 'c', 'd']
+index = [1, 2, 3, 4]
+data  = zip(index, name)
+print('zipped data: ', data)
+print('unzipping data: ', *data)
