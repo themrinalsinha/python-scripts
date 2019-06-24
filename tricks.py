@@ -43,3 +43,8 @@ print(x)
 import os
 print('Process ID: ', os.getpid())
 # =================================
+
+# Printing imported modules
+import sys
+imported_modules = [m.__name__ for m in sys.modules.values() if m]
+print('Imported modules\n', imported_modules, '\n')
