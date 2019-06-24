@@ -37,3 +37,9 @@ print(x)
 #                ii. Pressimistic
 # django omitmistic and Pressimistic
 # approaches for Concurrency
+# ================================
+
+# Getting current process id
+import os
+print('Process ID: ', os.getpid())
+# =================================
