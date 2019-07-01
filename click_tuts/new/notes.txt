@@ -1,0 +1,17 @@
+# click is a python package for creating command line interfaces in
+# a composable way with as little code as necessary.
+
+# Click in 3 points:
+# -> Arbitrary nesting of commands
+# -> Automatic help page generation
+# -> supports lazy loading of subcommands at runtime
+
+click supports two types of parameters for scripts: options and arguments
+Difference:
+Auguments can do less than options. The following features are only available
+for options.
+-> automatic prompting for missing input
+-> act as flags (boolean or otherwise)
+-> option values can be pulled from environment variables, arguments can not.
+-> options are fully documented in the help page, arguments are not (this is
+intentional as arguments might be too specific to be automatically documented)
