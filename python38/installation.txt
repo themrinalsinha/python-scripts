@@ -1,0 +1,16 @@
+source: https://dev.to/mortoray/how-to-install-python-3-8-on-ubuntu-1bp4
+
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.8
+
+sudo apt install python3.8-distutils
+python3.8 -m pip install --upgrade pip setuptools wheel
+
+$ python3.8 -m venv env
+Error: Command '['/src/mdl/env/bin/python3.8', '-Im', 'ensurepip', '--upgrade', '--default-pip']' returned non-zero exit status 1.
+
+$ python3.8 -m ensurepip
+/usr/bin/python3.8: No module named ensurepip
+
+sudo apt install python3.8-venv python3.8-dev
