@@ -1,0 +1,8 @@
+app.py
+setup.py
+samplecli.egg-info/PKG-INFO
+samplecli.egg-info/SOURCES.txt
+samplecli.egg-info/dependency_links.txt
+samplecli.egg-info/entry_points.txt
+samplecli.egg-info/requires.txt
+samplecli.egg-info/top_level.txt

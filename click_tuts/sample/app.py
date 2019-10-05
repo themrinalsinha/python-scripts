@@ -11,3 +11,6 @@ def initdb():
 @cli.command()
 def dropdb():
     click.echo('Dropped the database')
+
+def test():
+    print('Yo you...')
