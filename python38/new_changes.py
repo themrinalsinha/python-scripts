@@ -21,21 +21,21 @@ print(walrus)
 print('\nwith using assignment operator')
 print(walrus := True)
 
-# Better use
-print('\nwhile loop without walrus operator')
-inputs  = list()
-while True:
-    current = input('Write something: ')
-    if current == 'quit':
-        break
-    inputs.append(current)
-print('INPUTS: ', inputs)
+# # Better use
+# print('\nwhile loop without walrus operator')
+# inputs  = list()
+# while True:
+#     current = input('Write something: ')
+#     if current == 'quit':
+#         break
+#     inputs.append(current)
+# print('INPUTS: ', inputs)
 
-print('\nwhile loop with walrus operator')
-inputs = list()
-while (current := input('write something: ')) != 'quit':
-    inputs.append(current)
-print('INPUTS: ', inputs)
+# print('\nwhile loop with walrus operator')
+# inputs = list()
+# while (current := input('write something: ')) != 'quit':
+#     inputs.append(current)
+# print('INPUTS: ', inputs)
 
 
 # ===================================
@@ -109,3 +109,74 @@ except Exception as e:
 print(to_fahrenheit(celsius=40))
 # celcius is a keyword-only argument, so python raises an error if you try to spedify
 # it based on position, without the keyword.
+
+
+# ============================
+# ==== More precise types ====
+# ============================
+
+# Python's typing system is quite mature at this point. However, in python3.8, some
+# new features have been added to typing ao allow more precise typing.
+# -> Literal types
+# -> Typed dictonaries
+# -> Final objects
+# -> Protocols
+
+print('\nsample typehint function')
+
+def double(number: float) -> float:
+    return 2 * number
+print(double(4))
+print(double("I'm not a float.."))
+# As you can see above, double happily accepts string as an argument, even though
+# that's not a float. There are libraries that can use types at runtime. but that
+# is not that main use case for python's type system.
+# NOTE: that are several static type checkers available, including Pyright, Pytype
+# and Pyre. We'll use Mypy $ pip install mypy
+
+# There are four new PEPs about type checking that have been accepted and included
+# in Python 3.8. You’ll see short examples from each of these.
+
+# PEP 586 introduce the Literal type. Literal is a bit special in that it represents
+# one or several specific values. One use case of Literal is to be able to precisely
+# add types, when string arguments are used to describe specific behavior. Consider the following example:
+
+print('\nExample of Lateral Type check')
+def draw_line(direction: str) -> None:
+    if direction == 'H':
+        print('*' * 10)
+    elif direction == 'V':
+        print('*\n' * 10)
+    else:
+        raise ValueError(f'invalid direction {direction!r}')
+
+print('\ndrawing Horizontal line')
+draw_line('H')
+
+print('\ndrawing vertical line')
+draw_line('V')
+
+# if i pass 'up' as value that program will pass the static type checker,
+# even though, 'up' is an invalid direction. The typechecker only checks that 'up'
+# is a string, It would be more precise to say that direction must be either the lateral
+# string "H" for horizontal or "V" for vertical
+
+from typing import Literal
+
+def draw_line(direction: Literal['H', 'V']) -> None:
+    if direction == 'H':
+        print('*' * 10)
+    elif direction == 'V':
+        print('*\n' * 10)
+    else:
+        raise ValueError(f'invalid direction {direction!r}')
+print(draw_line('up'))
+
+# By exposing the allowed values of direction to the type checker, you can now be warned
+# about the error.
+# $ mypy draw_line.py
+# draw_line.py:15: error:
+#     Argument 1 to "draw_line" has incompatible type "Literal['up']";
+#     expected "Union[Literal['horizontal'], Literal['vertical']]"
+# Found 1 error in 1 file (checked 1 source file)
+
