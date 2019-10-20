@@ -265,3 +265,25 @@ class PythonVersion(TypedDict):
 py38 = PythonVersion(version="3.8", release_year=2019)
 print(py38)
 print(py38.get('version'))
+
+# Mypy will let you know if any of your values has the wrong type, or
+# if you use a key that has not been declared. See PEP 589 for more examples.
+# Mypy has supported Protocols for a while already. However, the official acceptance only happened in May 2019.
+# Protocols are a way of formalizing Python’s support for duck typing:
+
+# Duck typing allows you to, for example, read .name on any object that has a .name attribute,
+# without really caring about the type of the object. It may seem counter-intuitive for the typing
+# system to support this. Through structural subtyping, it’s still possible to make sense of duck typing.
+
+# You can for instance define a protocol called Named that can identify all objects with a .name attribute
+
+from typing import Protocol
+
+class Named(Protocol):
+    name: str
+
+def greet(obj: Named) -> None:
+    print(f"Hello, {obj.name}")
+
+# Here, greet() takes any object, as long as it defines a .name attribute.
+# See PEP 544 and the Mypy documentation for more information about protocols.
