@@ -21,21 +21,21 @@ print(walrus)
 print('\nwith using assignment operator')
 print(walrus := True)
 
-# # Better use
-# print('\nwhile loop without walrus operator')
-# inputs  = list()
-# while True:
-#     current = input('Write something: ')
-#     if current == 'quit':
-#         break
-#     inputs.append(current)
-# print('INPUTS: ', inputs)
+# Better use
+print('\nwhile loop without walrus operator')
+inputs  = list()
+while True:
+    current = input('Write something: ')
+    if current == 'quit':
+        break
+    inputs.append(current)
+print('INPUTS: ', inputs)
 
-# print('\nwhile loop with walrus operator')
-# inputs = list()
-# while (current := input('write something: ')) != 'quit':
-#     inputs.append(current)
-# print('INPUTS: ', inputs)
+print('\nwhile loop with walrus operator')
+inputs = list()
+while (current := input('write something: ')) != 'quit':
+    inputs.append(current)
+print('INPUTS: ', inputs)
 
 
 # ===================================
@@ -170,7 +170,7 @@ def draw_line(direction: Literal['H', 'V']) -> None:
         print('*\n' * 10)
     else:
         raise ValueError(f'invalid direction {direction!r}')
-print(draw_line('up'))
+# print(draw_line('up'))
 
 # By exposing the allowed values of direction to the type checker, you can now be warned
 # about the error.
@@ -180,3 +180,88 @@ print(draw_line('up'))
 #     expected "Union[Literal['horizontal'], Literal['vertical']]"
 # Found 1 error in 1 file (checked 1 source file)
 
+# Another exmaple:
+from typing import Union
+
+ARABIC_TO_ROMAN = [(1000, "M"), (900, "CM"), (500, "D"), (400, "CD"),
+                   (100, "C"), (90, "XC"), (50, "L"), (40, "XL"),
+                   (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")]
+
+def _convert_to_roman_numeral(number: int) -> str:
+    result = list()
+    for arabic, roman in ARABIC_TO_ROMAN:
+        count, number = divmod(number, arabic)
+        result.append(roman * count)
+    return ''.join(result)
+
+def add(num_1: int, num_2: int, to_roman: bool = True) -> Union[str, int]:
+    result = num_1 + num_2
+    if to_roman:
+        return _convert_to_roman_numeral(result)
+    else:
+        return result
+
+# The code has the correct type hints: the result of add() will be either str or int.
+# However, often this code will be called with a literal True or False as the value
+# of to_roman in which case you would like the type checker to infer exactly whether
+# str or int is returned. This can be done using Literal together with @overload
+
+# @overload
+# def add(num_1: int, num_2: int, to_roman: Literal[True]) -> str: ...
+# @overload
+# def add(num_1: int, num_2: int, to_roman: Literal[False]) -> int: ...
+
+# def add(num_1: int, num_2: int, to_roman: bool = True) -> Union[str, int]:
+#     """Add two numbers"""
+#     result = num_1 + num_2
+
+#     if to_roman:
+#         return _convert_to_roman_numeral(result)
+#     else:
+#         return result
+
+# The added @overload signatures will help your type checker infer str or int
+# depending on the literal values of to_roman. Note that the ellipses (...)
+# are a literal part of the code. They stand in for the function body in the overloaded signatures.
+
+# As a complement to Literal, PEP 591 introduces Final. This qualifier specifies that a variable or
+# attribute should not be reassigned, redefined, or overridden. The following is a typing error:
+from typing import Final
+
+ID: Final = 1
+ID += 1
+# Mypy will highlight the line ID += 1, and note that you Cannot assign to final name "ID".
+# This gives you a way to ensure that constants in your code never change their value.
+
+# Additionally, there is also a @final decorator that can be applied to classes and methods.
+# Classes decorated with @final can’t be subclassed, while @final methods can’t be overridden by subclasses:
+# from typing import final
+
+# @final
+# class Base:
+#     ...
+
+# class Sub(Base):
+#     ...
+
+# The third PEP allowing for more specific type hints is PEP 589, which introduces TypedDict.
+# This can be used to specify types for keys and values in a dictionary using a notation that
+# is similar to the typed NamedTuple.
+
+# Traditionally, dictionaries have been annotated using Dict. The issue is that this only allowed
+# one type for the keys and one type for the values, often leading to annotations like Dict[str, Any].
+# As an example, consider a dictionary that registers information about Python versions:
+py38 = {"version": "3.8", "release_year": 2019}
+
+# The value corresponding to version is a string, while release_year is an integer.
+# This can’t be precisely represented using Dict. With the new TypedDict, you can do the following:
+
+from typing import TypedDict
+
+class PythonVersion(TypedDict):
+    version: str
+    release_year: int
+
+py38 = PythonVersion(version="3.8", release_year=2019)
+print(py38)
+print(py38.get('version'))
