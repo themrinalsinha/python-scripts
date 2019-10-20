@@ -8,3 +8,4 @@ __pycache__/
 *.sqlite
 *.ini
 venv/
+.mypy_cache/
