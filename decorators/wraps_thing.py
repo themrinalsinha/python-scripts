@@ -62,5 +62,35 @@ print(add(1, 2))
 print(add.__doc__)
 print(mysum(1, 2, 3, 4, 5))
 print(mysum.__doc__)
-print('\n\n=====================================================\n\n')
+print('\n\n========================FUNCTOOLS.WRAPS=============================\n\n')
 
+# The good news is that we've now fixed the naming adn the docstring
+# problem. But the function signature is still the super-generic one,
+# looking for both *args and **kwargs.
+
+from functools import wraps
+
+def mydec(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        return f'{func(*args, **kwargs)}!!!'
+    return wrapper
+
+@mydeco
+def add(a, b):
+    '''
+    This is an add function
+    '''
+    return a + b
+
+@mydeco
+def mysum(*args):
+    '''
+    This is my sum funciton
+    '''
+    return sum(args)
+
+print(add(1, 2))
+print(add.__doc__)
+print(mysum(1, 2, 3, 4, 5))
+print(mysum.__doc__)
