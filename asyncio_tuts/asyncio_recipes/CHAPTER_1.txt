@@ -1,0 +1,37 @@
+What is asyncio ?
+-> The Python language, in version 3.4, has adopted a powerful cooperative
+    concurrency framework called asyncio. This cooperative concurrency
+    framework can be roughly split into high- and low-level APIs
+
+HIGH LEVEL EVENTS               LOW LEVEL EVENTS
+----------------------------------------------------
+Coroutines                      Event loop
+Tasks                           Futures
+Streams                         Transports
+Synchronization primitives      Protocols
+subprocess                      Policies
+Queues                          Platform support
+Exceptions
+
+A lot of usability improvements were added to asyncio in Python
+version 3.7, including the asyncio.run API, which abstracts direct access
+to event loops away and a couple of housekeeping tasks away from the
+developer.
+
+In the high level section, you learn how to:
+->  Make sure you do not run into race conditions when synchrozizing,
+    the coffman contiions, asyncio's versions of locks and semaphores,
+    and how race conditions manifest in asyncio code.
+
+->  make asyncio components talk to each other, including how to
+    implement traditional producer-cosumer patterns, client-server
+    schemes, etc.
+
+->  Imporove an asyncio application, includidng how to migrate to newer
+    Python API version and how to detect deprecated API's.
+
+->  Implement your own binary protocols and implement existing protocols,
+    including how to use asyncio's powerful protocol and transport abstractions
+
+->  Avoid common mistakes, including how to aviod too long-blockin code,
+    miss an await keyword etc..
