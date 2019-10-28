@@ -142,4 +142,12 @@ Using the threading. Thread and the side-effect-free (besides event loop
 policy creation) asyncio.new_event_loop APIs, we can create thread
 instances that have unique event loop instances.
 
+How it works:
+Loops live in the context of a loop policy. The DefaultLoopPolicy scopes
+the loop per thread and does not allow creation of a loop outside a main thread
+via asyncio.get_event_loop. Hence, we must create a thread local
+event loop via asyncio.set_event_loop(asyncio.new_event_loop()).
 
+We the await the asyncio.run_until_complete complete inside out internal
+worker funciton called _worker by waiting for the thread to be joined
+via. join_threads
