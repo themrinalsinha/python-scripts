@@ -1,0 +1,129 @@
+CH2 - Working with event loops
+------------------------------
+
+Python v3.4 has adopted a powerful framework to support concurrent execution
+of code: asyncio. This framework uses event loops to orchestrate the callback
+and asynchronous tasks. Event loop live in the context of event loop policies.
+
+Coroutines can be thought as a functions you can "pause" at stages explicitly
+marked with some sort of syntactical element. The coroutines state is tracked
+via. a task object, instantiated by the respective event loop. The eventloop
+keeps track of which task is currently running and delegates CPU time from
+idling coroutines to a pending one.
+
+In the course of this chapter, we will find out more about the event
+loop’s interface and its lifecycle. Event loop policies - and the impact global
+asyncio APIs have on them, will be discussed
+
+Locating the currently running loop problem
+-------------------------------------------
+For various reasons, it is imperative that a concurrency framework is able
+to tell you whether an event loop is currently running and which one it
+is. For instance, it might be essential for your code to assert that only one
+certain loop implementation is running your task. Hence only one task
+can alter some shared resource or to be sure that your callbacks will be
+dispatched.
+
+Solution:
+Use the global asyncio.get_event_loop and asyncio.get_running_loop
+APIs.
+
+Option 1:
+---------
+import asyncio
+loop = asyncio.get_event_loop()
+
+Option 2:
+---------
+import asyncio
+try:
+    loop = asyncio.get_running_loop()
+except RuntimeError:
+    print('No loop running')
+
+How it works
+-------------
+In >=Python 3.7, there are two valid ways to get the currently running loop instance.
+We can call asyncio.get_event_loop or asyncio.get_running_loop.
+But what does asyncio.get_event_loop do under the hood? It is a
+convenience wrapper for the following:
+
+1.  Check if there is a loop running at the point of
+    calling the function.
+2.	Return the running loop whose pid matches the
+    current process pid, if there are any.
+3.	If not, get the thread-global LoopPolicy instance
+    that’s stored in a global variable in the asyncio
+    module.
+4.	If it is not set, instantiate it with the
+    DefaultLoopPolicy using a lock.
+5.	Note that the DefaultLoopPolicy is OS dependent
+    and subclasses BaseDefaultEventLoopPolicy,
+    which provides a default implementation of loop.
+    get_event_loop, which is called.
+6.	Here is the catch: The loop_policy.get_event_loop
+    method instantiates a loop only if you are on the
+    main thread and assigns it to a thread local variable.
+    If you are not on the main thread and no running
+    loop is instantiated by other means, it will raise a
+    RuntimeError.
+
+This process has some issues:
+•	get_event_loop checks for the existence and returns
+    the currently running loop.
+•	The event loop policy is stored thread globally, whereas
+    the loop instance is stored thread locally.
+•	If you are on the main thread, get_event_loop will
+    instantiate the loop and save the instance thread locally
+    inside the policy.
+•	If you are not on the main thread, it will raise a
+    RuntimeError.
+
+asyncio.get_running_loop works differently. It will always return the
+currently running loop instance if there is one running. If there is none, it
+will raise a RuntimeError.
+
+
+Creating a New Loop instance
+-------------------------------------------------------------------
+
+problem:
+--------
+Since loops in asyncio are tightly coupled with the concept of loop
+policies, it not advisable to create the loop instances via the loop
+constructor. Otherwise, we might run into issues of scoping since the
+global asyncio.get_event_loop function retrieves only loops that
+either it created itself or was set via asyncio.set_event_loop.
+
+Solution:
+---------
+To create a new event loop instance, we will use the asyncio.new_event_
+loop API.
+
+Note This API does not alter the currently installed event loop
+but initializes the (asyncio) global event loop policy - if it was not
+initialized before.
+
+Another gotcha is that we will attach the newly created loop to the event
+loop policy watcher to make sure that our event loop monitors the termication
+of newly spawned subprocesses on UNIX Systems.
+
+import asyncio
+import sys
+
+loop = asyncio.new_event_loop()
+print(loop)
+asyncio.set_event_loop(loop)
+
+if sys.platform != 'win32':
+    watcher = asyncio.get_child_watcher()
+    warcher.attach_loop(loop)
+
+How it works
+-------------
+The asyncio.get_event_loop API only instantiates the loop if invoked
+from the main thread. Don’t use any convenience wrappers to create the
+loop and store it yourself, like shown. This is sure to work on any thread
+and makes the creation of the loop side-effect free (besides the global
+creation of the asyncio.DefaultLoopPolicy).
+
