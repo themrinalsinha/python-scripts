@@ -127,3 +127,19 @@ loop and store it yourself, like shown. This is sure to work on any thread
 and makes the creation of the loop side-effect free (besides the global
 creation of the asyncio.DefaultLoopPolicy).
 
+========================================================================
+
+Attaching a loop to the thread
+--------------------------------------
+Problem:
+Creating one loop per thread that’s bond to the thread and which’s
+finishing can be also awaited can be a challenging task. Later we learn
+about the executor API, which allows us to execute blocking coroutine calls
+as non-blocking calls by executing the respective calls on a thread pool.
+
+Solution:
+Using the threading. Thread and the side-effect-free (besides event loop
+policy creation) asyncio.new_event_loop APIs, we can create thread
+instances that have unique event loop instances.
+
+
