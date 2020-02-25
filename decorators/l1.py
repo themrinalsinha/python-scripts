@@ -1,4 +1,5 @@
-
+# https://dev.to/apcelent/python-decorator-tutorial-with-example-529f
+# https://realpython.com/primer-on-python-decorators/
 
 def command(name, **cmd_args):
     def wrapper(func):

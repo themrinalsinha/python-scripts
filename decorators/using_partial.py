@@ -49,14 +49,15 @@ def partial(func, *args, **keywords):
     newFunc.keywords = keywords
     return newFunc
 
-# The partial() is used for partial function application which 'freezes'
-# some portion of a functions arguments and/or keywords resulting in a new
-# object with a simplified signature.
+# # IMPORTANT
+# # The partial() is used for partial function application which 'freezes'
+# # some portion of a functions arguments and/or keywords resulting in a new
+# # object with a simplified signature.
 
-# Eg. partial() can be used to create a callable that behaves live the int()
-# function where the base arguments default to two.
-from functools import partial
-print('\nUSING PARTIAL FUNCTION//')
-basetwo = partial(int, base=2)
-print(basetwo.__doc__)
-print(basetwo('10010'))
+# # Eg. partial() can be used to create a callable that behaves live the int()
+# # function where the base arguments default to two.
+# from functools import partial
+# print('\nUSING PARTIAL FUNCTION//')
+# basetwo = partial(int, base=2)
+# print(basetwo.__doc__)
+# print(basetwo('10010'))
