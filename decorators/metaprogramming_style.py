@@ -21,3 +21,38 @@ object is "called"
 def func_callable():
     pass
 print(f"Function is callable: {func_callable.__call__}")
+
+
+# decorators
+"""
+Metaclasses are often perceived as a very tricky and dangerous thing to play with,
+and indeed they are seldom required in python, with the most notable exception
+(no pun intended) being the Abstract Base Class provided by the collection module.
+
+Decorators, on the other side, are a feature loved by many experienced programmers
+and after their introduction the community has developed a big set of very interasing use cases.
+"""
+# # Example....
+
+# @dec
+# def func(*args, **kwargs):
+#     pass
+
+# or
+
+# func = dec(func)
+# =========================
+def func():
+    """
+    setting custom function attribute in python
+    """
+    pass
+func.attr = "a custom function attribute"
+print(f'function attribute: {func.attr}')
+
+
+class SomeClass(object):
+    pass
+SomeClass.attr = "a custom class attribute"
+print(f'a custom class attribute: {SomeClass.attr}')
+print('\n\n')
