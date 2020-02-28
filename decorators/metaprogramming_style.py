@@ -41,7 +41,7 @@ and after their introduction the community has developed a big set of very inter
 # or
 
 # func = dec(func)
-# =========================
+# ==================================================
 def func():
     """
     setting custom function attribute in python
@@ -55,4 +55,23 @@ class SomeClass(object):
     pass
 SomeClass.attr = "a custom class attribute"
 print(f'a custom class attribute: {SomeClass.attr}')
-print('\n\n')
+print('\n')
+# ===================================================
+
+# class based decorators without arguments
+class CustomAttr(object):
+    def __init__(self, func):
+        self.attr = 'a custom function attribute'
+        self.func = func
+
+    def __call__(self):
+        print(f'1. call method called: {self.attr}')
+        self.func()
+        print(f'2. post func exected')
+
+@CustomAttr
+def func():
+    print('===> my function :)')
+    pass
+
+func()
