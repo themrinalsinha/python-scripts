@@ -111,7 +111,46 @@ async def fib(n):
         return await fib(n-1) + await fib(n-2)
 
 async def main():
-    for n in range(30):
+    for n in range(10):
         print(await fib(n))
 
 run(main())
+# ===========================================================
+
+import time
+
+print()
+
+def count():
+    time.sleep(1)
+    print(1)
+    time.sleep(1)
+    print(2)
+    time.sleep(1)
+    print(3)
+
+def main():
+    for i in range(3):
+        count()
+
+t = time.perf_counter()
+main()
+t2 = time.perf_counter() - t
+print(f'Total time elapsed: {t2:0.2f} seconds')
+
+# ====================================================
+# Now we'll do the same thing using asyncio
+import asyncio
+
+async def count():
+    await asyncio.sleep(1)
+    print(1)
+    await asyncio.sleep(1)
+    print(2)
+    await asyncio.sleep(1)
+    print(3)
+
+async def main():
+    await asyncio.gather(count(), count(), count())
+
+asyncio.run(main())
