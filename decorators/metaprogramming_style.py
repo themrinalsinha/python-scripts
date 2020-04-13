@@ -75,3 +75,7 @@ def func():
     pass
 
 func()
+print('\n')
+# =================================================
+
+# class based decorators with arguments
