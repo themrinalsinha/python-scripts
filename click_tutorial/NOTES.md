@@ -205,3 +205,48 @@ def main(name):
             reset=True,
     )
 ```
+-------------------------------------
+#### Reading data from configuration file
+Firstly you need an additional python package
+- `$ pip install click-config-file`
+
+Now, let's say you have a CLI application that takes optional parameter name and salary as input but you don't want to pass those params from the command line rather you want to pass it from a configuration file. Example
+
+```python
+import click
+import click_config_file
+
+@click.command()
+@click.option('--name', '-n', default="Sinha", help="specify name")
+@click.option('--salary', '-s', type=int)
+@click_config_file.configuration_option() # this will add an option of --config
+def main(name, salary):
+    click.echo(f"Hello, {name}. Your salary is: {salary}")
+
+if __name__ == "__main__":
+    main()
+```
+```shell
+$ python app.py --help
+
+Options:
+  -n, --name TEXT       specify name
+  -s, --salary INTEGER
+  --config FILE         Read configuration from FILE.
+  --help                Show this message and exit.
+-----------------------------------------------------
+one way to run it is:
+$ python app_config.py --name Mrinal -s 12000000
+$ Hello, Mrinal. Your salary is: 12000000
+----------------------------------------------------
+Now we want to pass/accept these param in as a config file
+now create a configuration file:
+$ nano config.conf
+name="Mrinal Sinha"
+salary="9999999999"
+save it...
+
+Now, to pass it in as a config file.
+$ python app.py --config config.conf
+$ Hello, Mrinal Sinha. Your salary is: 9999999999
+```
