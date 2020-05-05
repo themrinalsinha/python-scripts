@@ -93,14 +93,14 @@ Other way if you pass values as options it will not prompt eg:
 $ python app.py --name Mrinal --age 25 ## it will not prompt
 Hello, Mrinal >|< Age: 25
 ```
-- taking input in hidden manner, eg for `passwords`
+- taking input in hidden manner using `hide_input`, eg for passwords
 ```python
 @click.option('--password', '-p', prompt=True, hide_input=True)
 
 $ python app.py
 $ Password: <take input in hidden manner>
 ```
-- taking password and also confirming (re-prompt for confirmation)
+- taking password and also confirming `hide_input` & `confirmation_prompt` (re-prompt for confirmation)
 ```python
 @click.option('--password', '-p', prompt=True, hide_input=True, confirmation_prompt=True)
 
