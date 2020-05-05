@@ -109,3 +109,51 @@ $ Password: <take input in hidden manner>
 $ Repeat for confirmation: <takes input in hidden manner>
 # if both do not match it will throw an error and ask again to enter.
 ```
+
+---------------------------------------------------------------
+#### creating command groups
+```shell
+$ python app.py
+
+Commands:
+  leet     Leet given string
+  reverse  Reverse given string
+  shuffle  shuffle given string
+```
+so in order to build command groups in python, you create a main
+parent head, so everything is going to be grouped under this
+parent head, It is going to be the main command and others are
+going to be it's sub commands.
+
+```python
+@click.group()
+def main():
+    """ main parent head function """
+    pass
+
+
+@main.command()
+@click.argument("text")
+def leet(text):
+    """
+    Leet given string
+    """
+    # logic
+
+@main.command()
+@click.argument("text")
+def reverse(text):
+    """
+    Reverse given string
+    """
+    # logic
+
+@main.command()
+@click.argument("text")
+def shuffle(text):
+    """
+    shuffle given string
+    """
+    # logic
+```
+- `main()` is the parent command while `leet`, `reverse` and `shuffle` are the sub-commands.
