@@ -157,3 +157,51 @@ def shuffle(text):
     # logic
 ```
 - `main()` is the parent command while `leet`, `reverse` and `shuffle` are the sub-commands.
+---------------------------------
+
+#### Adding style to cli tool
+
+You need `colorama` installed -> `$ pip install colorama`
+- in order to apply style you can do it directly using click
+- `click.echo(click.style(...))` is equivalent to `click.secho(...)`
+- all the options provided by this function is: fg, bg, bold, dim, underline, blink, reverse, reset
+```python
+@click.command()
+@click.option('--name', '-n')
+def main(name):
+    click.echo(f"My name is {name}") # normal printing
+    click.echo(
+        click.style(
+            f"My name is {name}", # text to print
+            fg = "red",
+            bg = "white",
+        )
+    )
+    # print with all other options
+    click.echo(
+        click.style(
+            f"My name is {name}", # text to print
+            fg = "red",
+            bg = "white",
+            bold = True,
+            dim=False,
+            underline=True,
+            blink=True,
+            reverse=True,
+            reset=True,
+        )
+    )
+
+    # In order to apply style you can directly use secho from click
+    click.secho(
+        f"My name is {name}", # text to print
+            fg = "red",
+            bg = "white",
+            bold = True,
+            dim=False,
+            underline=True,
+            blink=True,
+            reverse=True,
+            reset=True,
+    )
+```
