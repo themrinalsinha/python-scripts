@@ -1,3 +1,4 @@
 click
+click-params
 click-config-file
 colorama

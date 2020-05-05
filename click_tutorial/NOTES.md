@@ -250,3 +250,44 @@ Now, to pass it in as a config file.
 $ python app.py --config config.conf
 $ Hello, Mrinal Sinha. Your salary is: 9999999999
 ```
+
+-------------------------
+#### Validating input from the CLI
+firstly you need additional package for that
+- `$ pip install click_params`
+
+This package helps you with the type and that you can use to validate input, example
+```python
+import click
+from click_params import EMAIL, DOMAIN, PUBLIC_URL
+
+@click.group()
+def main():
+    pass
+
+@main.command()
+@click.option("--name", '-n')
+@click.option("--email", '-e', type=EMAIL)
+@click.option("--domain", '-d', type=DOMAIN)
+@click.option("--website", '-w', type=PUBLIC_URL)
+def add_user(name, email, domain, website):
+    """
+    command to add user
+    """
+    click.echo(f"Your name is: {name}")
+    click.echo(f"Your email is: {email}")
+    click.echo(f"Your domain is: {domain}")
+    click.echo(f"Your website is: {website}")
+
+if __name__ == "__main__":
+    main()
+```
+```shell
+$ python app.py add-user --name Mrinal --email mrinal@
+advarisk.com --domain xyz.com --website https://xyz.com
+
+Your name is: Mrinal
+Your email is: mrinal@advarisk.com
+Your domain is: xyz.com
+Your website is: https://xyz.com
+```
