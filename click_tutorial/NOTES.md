@@ -73,3 +73,39 @@ $ python app.py a b c d e
 $ places: (a, b, c, d)
 $ birth place: e
 ```
+------------------------
+#### Working with "prompt & user input"
+`prompt` is used when you want to take user input
+```python
+@click.command()
+@click.option('--name', '-n', prompt=True, help="Please, your name?")
+@click.option('--age', '-a', type=int, prompt="What is your age?")
+def main(name, age):
+    click.echo(f"Hello, {name} >|< Age: {age}")
+```
+```shell
+$ python app.py
+$ Name: Mrinal           ## will prompt for name
+$ What is your age?: 25  ## will ask for age with custom message
+Hello, Mrinal >|< Age: 25
+----------------------------------------------------------------
+Other way if you pass values as options it will not prompt eg:
+$ python app.py --name Mrinal --age 25 ## it will not prompt
+Hello, Mrinal >|< Age: 25
+```
+- taking input in hidden manner, eg for `passwords`
+```python
+@click.option('--password', '-p', prompt=True, hide_input=True)
+
+$ python app.py
+$ Password: <take input in hidden manner>
+```
+- taking password and also confirming (re-prompt for confirmation)
+```python
+@click.option('--password', '-p', prompt=True, hide_input=True, confirmation_prompt=True)
+
+$ python app.py
+$ Password: <take input in hidden manner>
+$ Repeat for confirmation: <takes input in hidden manner>
+# if both do not match it will throw an error and ask again to enter.
+```
