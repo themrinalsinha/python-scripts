@@ -44,3 +44,32 @@ $ python app.py -s "102" -> 102
 $ python app.py -s 102 -> 102
 $ python app.py -s "abc" -> throw error
 ```
+----------------------------------------------------
+#### Working with "argument"
+`argument` are mandatory parameter unless you are not passing default value
+- argument(input_name, default=None)
+```python
+@click.command()
+@click.argument('name')
+@click.argument('age', type=int)
+@click.argument('pan', default="ABCD1234E")
+def main(name, pan, age):
+    click.echo(f"Hello, {name} ({age} - yrs young!)")
+    click.echo(f"Your PAN number is: {pan}")
+    click.echo(f"VALID PAN HOLDER") \
+        if age >= 18 else click.echo(f"INVALID PAN HOLDER")
+```
+working with `nargs`
+- If you pass `nargs = -1` (it will take any number of arguments in)
+- If you pass anything else, it will take that amount fixed (as seen above)
+```python
+@click.argument('places', nargs=-1)
+@click.argument('birth_places', nargs=1)
+def main(places, birth_places):
+    click.echo(f"places: {places}")
+    click.echo(f"birth place: {birth_places}")
+
+$ python app.py a b c d e
+$ places: (a, b, c, d)
+$ birth place: e
+```
