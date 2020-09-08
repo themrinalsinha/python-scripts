@@ -35,7 +35,7 @@ OBJECTIVE
 12. What's the difference between multiprocessing, asyncio, and concurrency.futures?
 13. How can do I test asyncio with pytest?
 
-Q. WHAT IS CONCURRENCY ??
+WHAT IS CONCURRENCY ??
 ----> An effective definition for concurrency is "being able to perform multiple tasks at once".
       This is a bit misleading though, as the tasks may or may not actually be performed at exactly
       the same time. Instead, a process might start, then once it's waiting on a specific instruction
@@ -43,3 +43,12 @@ Q. WHAT IS CONCURRENCY ??
       Once one task is finished, it switches again to an unfinished task until they have all been performed.
       Tasks start asynchronously, get performed asynchronously, and then finish asynchronously.
 
+THREADS ??
+----> A thread is a way of allowing your computer to break up a single process/program into many lightweight
+      pieces that execute in parallel. Somewhat confusingly, Python's standard implementation of threading
+      limits threads to only being able to execute one at a time due to something called the Global Interpreter
+      Lock (GIL). The GIL is necessary because CPython's (Python's default implementation) memory management is
+      not thread-safe. Because of this limitation, threading in Python is concurrent, but not parallel.
+      To get around this, Python has a separate multiprocessing module not limited by the GIL that spins up
+      separate processes, enabling parallel execution of your code. Using the multiprocessing module is nearly
+      identical to using the threading module.
