@@ -20,6 +20,15 @@ class Test(object):
     def methoda(self):
         print("Hola, desh")
 
+    # working with static methods
+    # NOTE: static method doesn't take self as first param
+    @staticmethod
+    def methodb():
+        print("I'am static method...")
+
+    def __str__(self) -> str:
+        return "object..."
+
 
 if __name__ == "__main__":
     obj = Test(123)
@@ -34,3 +43,7 @@ if __name__ == "__main__":
 
     # property value of the class can be accessed directly without calling method
     print(obj.methoda)
+
+    # static method
+    print(obj.methodb())
+    print(Test.methodb())
