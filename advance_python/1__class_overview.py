@@ -1,7 +1,13 @@
 
 class Test(object):
+
+    MYVAR_1 = 1
+    MYVAR_2 = 2
+    MYVAR_3 = 3
+    MYVAR_4 = 4
+
     def __init__(self, num=1) -> None:
-        self.num = num ## class variable
+        self.num = num
         self._num = 2  ## Private variable
         self.__num = 3 ## Protected variable
 
@@ -29,6 +35,9 @@ class Test(object):
     def __str__(self) -> str:
         return "object..."
 
+    @classmethod
+    def classvariableaccess(cls):
+        print(f"class variable access: {cls.MYVAR_1} {cls.MYVAR_2} {cls.MYVAR_3} {cls.MYVAR_4}")
 
 if __name__ == "__main__":
     obj = Test(123)
@@ -47,3 +56,12 @@ if __name__ == "__main__":
     # static method
     print(obj.methodb())
     print(Test.methodb())
+
+    # class variable
+    print(Test.MYVAR_1)
+    print(Test.MYVAR_2)
+    print(Test.MYVAR_3)
+    print(Test.MYVAR_4)
+
+    # calling a class method
+    print(obj.classvariableaccess())
