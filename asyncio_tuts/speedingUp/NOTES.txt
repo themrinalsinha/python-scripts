@@ -1,0 +1,45 @@
+What are concurrency and parallelism, and how do they apply to Python?
+
+There are many reasons your applications can be slow. Sometimes this is
+due to poor algorithmic design or the wrong choice of data structure.
+Sometimes, however, it's due to forces outside of our control, such as
+hardware constraints or the quirks of networking. That's where concurrency
+and parallelism fit in. They allow your programs to do multiple things at once,
+either at the same time or by wasting the least possible time waiting on busy tasks.
+
+Whether you're dealing with external web resources, reading from and writing to
+multiple files, or need to use a calculation-intensive function multiple times
+with different parameters, this post should help you maximize the efficiency
+and speed of your code.
+
+First, we'll delve into what concurrency and parallelism are and how they fit
+into the realm of Python using standard libraries such as threading, multiprocessing,
+and asyncio. The last portion of this post will compare Python's implementation
+of async/await with how other languages have implemented them.
+
+===========================================================================================
+
+OBJECTIVE
+-------------------------------------------------------------------------------------------
+1. What is concurrency?
+2. What is a thread?
+3. What does it mean when something is non-blocking?
+4. What is an event loop?
+5. What's a callback?
+6. Why is the asyncio method always a bit faster than the threading method?
+7. When should you use threading, and when should you use asyncio?
+8. What is parallelism?
+9. What's the difference between concurrency and parallelism?
+10. Is it possible to combine asyncio with multiprocessing?
+11. When should you use multiprocessing vs asyncio or threading?
+12. What's the difference between multiprocessing, asyncio, and concurrency.futures?
+13. How can do I test asyncio with pytest?
+
+Q. WHAT IS CONCURRENCY ??
+----> An effective definition for concurrency is "being able to perform multiple tasks at once".
+      This is a bit misleading though, as the tasks may or may not actually be performed at exactly
+      the same time. Instead, a process might start, then once it's waiting on a specific instruction
+      to finish, switch to a new task, only to come back once it's no longer waiting.
+      Once one task is finished, it switches again to an unfinished task until they have all been performed.
+      Tasks start asynchronously, get performed asynchronously, and then finish asynchronously.
+
