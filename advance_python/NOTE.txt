@@ -1,0 +1,11 @@
+Learning about metaclass and design patterns in python:
+
+-> Learn about Python Objects
+-> Learn about Programming Meta class
+-> Learn about Design patterns
+    - Fascade
+    - Singleton
+    - Factory
+    - Custom Decorators
+-> Recap on Inheritance
+-> Combine Meta class and Design Pattern with operator overloading
