@@ -15,6 +15,11 @@ class Test(object):
         self.__num = val
         return self.__num
 
+    # working with property decorator
+    @property
+    def methoda(self):
+        print("Hola, desh")
+
 
 if __name__ == "__main__":
     obj = Test(123)
@@ -26,3 +31,6 @@ if __name__ == "__main__":
     print(obj.get())
     print(obj.set(333))
     print(obj.get())
+
+    # property value of the class can be accessed directly without calling method
+    print(obj.methoda)
