@@ -1,0 +1,60 @@
+DEBUG:root:
+            Function name  : methodA,
+            Execution time : 0:00:00.000023,
+            Memory Size    : 136,
+            Date           : <built-in method date of datetime.datetime object at 0x7fe9ac671e10>
+        
+DEBUG:root:
+            Function name  : methodA,
+            Execution time : 0:00:00.000024,
+            Memory Size    : 136,
+            Date           : <built-in method date of datetime.datetime object at 0x7f2da2caee10>
+        
+DEBUG:root:
+            Function name  : methodA,
+            Execution time : 0:00:00.000026,
+            Memory Size    : 136,
+            Date           : <built-in method date of datetime.datetime object at 0x7f8f1d78de10>
+        
+DEBUG:root:
+            Function name  : methodA,
+            Execution time : 0:00:00.000033,
+            Memory Size    : 136,
+            Date           : <built-in method date of datetime.datetime object at 0x7f75b6d0ae10>
+        
+DEBUG:root:
+            Function name  : methodA,
+            Execution time : 0:00:00.000026,
+            Memory Size    : 136,
+            Date           : 2020-09-09
+        
+DEBUG:root:
+            Function name  : methodA,
+            Execution time : 0:00:00.000025,
+            Memory Size    : 136,
+            Date           : 2020-09-09
+        
+DEBUG:root:
+            Function name  : methodA,
+            Execution time : 0:00:00.000053,
+            Memory Size    : 136,
+            Date           : 2020-09-09
+        
+DEBUG:root:
+            Function name  : methodA,
+            Execution time : 0:00:00.000026,
+            Memory Size    : 136,
+            Date           : 2020-09-09
+        
+DEBUG:root:
+            Function name  : methodA,
+            Execution time : 0:00:00.000033,
+            Memory Size    : 136,
+            Date           : 2020-09-09
+        
+DEBUG:root:
+            Function name  : method__B,
+            Execution time : 0:00:00.000014,
+            Memory Size    : 136,
+            Date           : 2020-09-09
+        
