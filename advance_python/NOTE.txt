@@ -9,3 +9,6 @@ Learning about metaclass and design patterns in python:
     - Custom Decorators
 -> Recap on Inheritance
 -> Combine Meta class and Design Pattern with operator overloading
+
+============================================================
+creating singleton design pattern with meta class
