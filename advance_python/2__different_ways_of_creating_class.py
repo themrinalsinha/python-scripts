@@ -69,3 +69,23 @@ class MyClass(metaclass=Meta):
         pass
 mc = MyClass()
 print(mc)
+
+
+# METHOD - 5
+class F(type):
+    def __call__(cls, *args: Any, **kwargs: Any) -> Any:
+        instance = super(F, cls).__call__(*args, **kwargs)
+        return instance
+
+    def __init__(cls, name, base, attr) -> None:
+        super(F, cls).__init__(name, base, attr)
+
+class G(metaclass=F):
+    def __new__(cls, *args, **kwargs):
+        return super(G, cls).__new__(cls, *args, **kwargs)
+
+    def __init__(self, *args, **kwargs) -> None:
+        super(G, self).__init__(*args, **kwargs)
+
+g = G()
+print(g)
