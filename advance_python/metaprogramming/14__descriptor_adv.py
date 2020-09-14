@@ -106,10 +106,12 @@ class Stock(Structure):
     _fields = ['name', 'price', 'shares']
 
     # name    = String("name")
+    # name    = SizedRegexString("name", maxlen=5) # throw error that pat is missing
     name    = SizedRegexString("name", maxlen=5, pat='[A-Z]+$')
     price   = Float("price")
     shares  = PositiveInteger("shares")
 
 # s = Stock(name="aapl", price=101.0, shares=112)   # will throw error regex fail
 # s = Stock(name="AAPLEX", price=101.0, shares=112) # will throw error exceeding maxlen
+s = Stock(name="AAPL", price=101.0, shares=123)
 s = Stock(name="AAPL", price=101.0, shares=112)
