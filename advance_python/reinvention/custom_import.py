@@ -58,9 +58,25 @@ class NonEmptyString(String, NonEmpty):
 class PositiveInteger(Integer, Positive):
     pass
 
+# def checked(func):
+#     _signature  = signature(func)
+#     _annotation = func.__annotations__
+
+#     @wraps(func)
+#     def wrapper(*args, **kwargs):
+#         bound = _signature.bind(*args, **kwargs)
+#         for name, value in bound.arguments.items():
+#             if name in _annotation:
+#                 _annotation[name].check(value)
+#         return func(*args, **kwargs)
+#     return wrapper
+
 def checked(func):
     _signature  = signature(func)
-    _annotation = func.__annotations__
+    _annotation = ChainMap(
+        func.__annotations__,
+        func.__globals__.get('__annotations__',{})
+    )
 
     @wraps(func)
     def wrapper(*args, **kwargs):
