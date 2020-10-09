@@ -53,5 +53,18 @@ my_collection = my_database['posts']
 finding in collection/table
 """
 record = my_collection.find_one()
-print(f"Single occurrence: {record}") # it will just return the 1st object
+# print(f"Single occurrence: {record}") # it will just return the 1st object
 
+records = my_collection.find()
+print(f"All occurrences: {records}") # return all the records
+
+myquery = {"title": "qui est esse"}
+records = my_collection.find(myquery)
+for _record in records:
+    print(_record)
+
+print()
+myquery = {"title": {"$regex": "^ea"}}
+records = my_collection.find(myquery)
+for _record in records:
+    print(_record)
