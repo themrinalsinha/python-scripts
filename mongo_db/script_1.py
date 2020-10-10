@@ -79,7 +79,7 @@ for _record in records[:10]:
 print()
 
 # sorting in descending order
-records = my_collection.find().sort('title', -1)
+records = my_collection.find().sort('title', -1).limit(10)
 for _record in records[:10]:
     print(_record.get('title'))
 print()
@@ -99,3 +99,27 @@ myquery = {'title': {'$regex': "^qui"}}
 r = my_collection.delete_many(myquery)
 print(f"RAW result: {r.raw_result}")
 print(f"DELETE count: {r.deleted_count}")
+
+
+"""
+updating records
+"""
+# updating single record
+myquery = {'title': 'the importance of hello'}
+newvalue = {'$set': {'title': 'hello there bro...'}}
+r = my_collection.update_one(myquery, newvalue)
+print(f"UPDATE (one): {r.raw_result} | {r.upserted_id}")
+
+# updating multiple record
+myquery = {'title': {'$regex': '^o'}}
+newvalue = {'$set': {'title': 'Ooooooaoaaaaa....'}}
+r = my_collection.update_many(myquery, newvalue)
+print(f"UPDATE (many): {r.raw_result} | {r.upserted_id}")
+
+
+"""
+droppig database and collection
+"""
+my_collection.drop()
+client.drop_database('posts')
+print(f'Available db: {client.list_database_names()}')
