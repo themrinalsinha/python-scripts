@@ -40,14 +40,14 @@ Collections in mongodb are like tables in the SQL
 my_database   = client['my_database']
 my_collection = my_database['posts']
 
-# # inserting data in our collection
-# my_collection.insert_many(get_data())
-# my_record = my_collection.insert_one({
-#     "id": 101,
-#     "title": "the importance of hello",
-#     "body": "the world beyond hello",
-# })
-# print(f"Inserted document id: {my_record.inserted_id}")
+# inserting data in our collection
+my_collection.insert_many(get_data())
+my_record = my_collection.insert_one({
+    "id": 101,
+    "title": "the importance of hello",
+    "body": "the world beyond hello",
+})
+print(f"Inserted document id: {my_record.inserted_id}")
 
 """
 finding in collection/table
@@ -68,3 +68,34 @@ myquery = {"title": {"$regex": "^ea"}}
 records = my_collection.find(myquery)
 for _record in records:
     print(_record)
+
+"""
+arranging database
+"""
+# sorting in ascending order
+records = my_collection.find().sort('title', 1)
+for _record in records[:10]:
+    print(_record.get('title'))
+print()
+
+# sorting in descending order
+records = my_collection.find().sort('title', -1)
+for _record in records[:10]:
+    print(_record.get('title'))
+print()
+
+
+"""
+delete operations
+"""
+myquery = {'title': 'sed ab est est'}
+# delete one record
+r = my_collection.delete_one(myquery)
+print(f"RAW result: {r.raw_result}")
+print(f"DELETE count: {r.deleted_count}")
+
+# delete many records
+myquery = {'title': {'$regex': "^qui"}}
+r = my_collection.delete_many(myquery)
+print(f"RAW result: {r.raw_result}")
+print(f"DELETE count: {r.deleted_count}")
