@@ -113,3 +113,12 @@ result = es.search(
 )
 
 print(f"\nCombined query: {result}")
+
+# =========== using regular expression on search ============
+# regular expression to match everything
+result = es.search(index="newindex", body={"query": {"regexp": {"sentence": ".*"}}})
+print(f"\nREGULAR EXPRESSION (Search): {result}")
+
+# match those with "sun" as subset
+result = es.search(index="newindex", body={"query": {"regexp": {"sentence": "sun.*"}}})
+print(f"\nRE (sun as subset): {result}")
