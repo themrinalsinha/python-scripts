@@ -122,3 +122,79 @@ print(f"\nREGULAR EXPRESSION (Search): {result}")
 # match those with "sun" as subset
 result = es.search(index="newindex", body={"query": {"regexp": {"sentence": "sun.*"}}})
 print(f"\nRE (sun as subset): {result}")
+es.indices.delete("newindex")
+
+# ====================================================================================
+es.indices.delete("travel")
+es.indices
+"""
+MAPPING
+----------------------------------------------------------------------------------
+As per Elasticsearch Reference, "Mapping is the process of defining how a document,
+and the fields it contains, are stored and indexed.
+
+It enables in faster search retrieval and aggregations. Hence, your mapping defines
+how effectively you can handle you data. A bad mapping can have severe consequences
+on the performance of your system.
+"""
+
+data = [
+    {"city": "Banglore", "country": "India", "datetime": "2018,01,01,10,20,00"}, # YYYY,MM,dd,hh,mm,ss
+    {"city": "London", "country": "England", "datetime": "2020,01,02,10,20,10"},
+    {"city": "Washington", "country": "USA", "datetime": "2019,01,01,10,20,00"},
+    {"city": "Canberra", "country": "Australia", "datetime": "2018,02,01,11,20,00"},
+]
+
+for index, record in enumerate(data, start=1):
+    es.index(index="travel", id=index, body=record)
+
+# to get the existing mapping that the es built for us
+_mapping = es.indices.get_mapping(index="travel")
+print(f"\nMAPPING (in-built)\n{_mapping}")
+"""
+Example:
+{'travel': {'mappings': {'properties':
+    {'city': {'type': 'text', 'fields': {'keyword': {'type': 'keyword', 'ignore_above': 256}}},
+     'country': {'type': 'text', 'fields': {'keyword': {'type': 'keyword', 'ignore_above': 256}}},
+     'datetime': {'type': 'text', 'fields': {'keyword': {'type': 'keyword', 'ignore_above': 256}}}}}}}
+
+NOTE: here you can see that the datetime field is not considered as mapping,
+      rather it is taken as a string (in default mapping), so in order to handle
+      such scenarios, we need to create our own custom mapping.
+"""
+# to create your own custom mapping
+es.indices.put_mapping(
+    index = "travel",
+    body = {
+        "properties": {
+            "city": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    }
+                }
+            },
+            "country": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    }
+                }
+            },
+            "datetime": {
+                "type": "date",
+                "format": "yyyy,MM,dd,hh,mm,ss"
+            }
+        }
+    }
+)
+# es.indices.delete(index="travel")
+# es.indices.create(index="travel")
+
+# inserting data again
+# for index, record in enumerate(data, start=1):
+#     es.index(index="travel", id=index, body=record)
