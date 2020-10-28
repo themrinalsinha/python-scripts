@@ -79,3 +79,37 @@ print(f"\nResult (term search): {result}")
 
 result = es.search(index="english", body={"from": 0, "size": 1, "query": {"term": {"sentence": "Bored AF"}}})
 print(f"\nResult (term search): {result}")
+es.indices.delete("english")
+
+
+# =========== (combining queries) - must / must_not / should ===========
+print()
+doc_1 = {"sentence": "Today is a sunny day"}
+doc_2 = {"sentence": "Today is a bright-sunny day"}
+doc_3 = {"sentence": "Tomorrow is day after today"}
+doc_4 = {"sentence": "Bored AF"}
+
+es.index(index="newindex", id=1, body=doc_1)
+es.index(index="newindex", id=2, body=doc_2)
+es.index(index="newindex", id=3, body=doc_3)
+es.index(index="newindex", id=4, body=doc_4)
+
+result = es.search(
+    index = "newindex",
+    body = {
+        "from": 0,
+        "size": 1,
+        "query": {
+            "bool": {
+                "must_not": {
+                    "match": {"sentence": "bright"}
+                },
+                "should": {
+                    "match": {"sentence": "sunny"}
+                }
+            }
+        }
+    }
+)
+
+print(f"\nCombined query: {result}")
