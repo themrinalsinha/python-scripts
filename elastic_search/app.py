@@ -198,3 +198,5 @@ es.indices.put_mapping(
 # inserting data again
 # for index, record in enumerate(data, start=1):
 #     es.index(index="travel", id=index, body=record)
+
+# ======== BULK / SCAN ========
