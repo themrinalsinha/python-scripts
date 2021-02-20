@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - "./config/mysql.cnf:/etc/mysql/conf.d/my.cnf"
+      - "db_data:/var/lib/mysql-files"
+    ports:
+      - "3307:3306"
+    env_file:
+      - ./config/local.env
+
+volumes:
+  db_data:

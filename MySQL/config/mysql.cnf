@@ -1,0 +1,16 @@
+[mysqld]
+bind-address                  = 0.0.0.0
+character-set-server          = utf8mb4
+collation-server              = utf8mb4_unicode_ci
+default-authentication-plugin = mysql_native_password
+
+# binarylog settings
+log-bin                       = mysql-bin
+server-id                     = 1
+binlog-format                 = row
+gtid_mode                     = ON
+log-slave_updates             = true
+enforce_gtid_consistency
+
+[client]
+default-character-set         = utf8mb4
