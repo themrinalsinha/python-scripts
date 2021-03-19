@@ -1,0 +1,5 @@
+snakeviz
+
+# install this requirement
+# run app.py
+# then run snakeviz sample.profile
