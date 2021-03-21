@@ -1,3 +1,5 @@
+# https://medium.com/fundbox-engineering/https-medium-com-fundbox-engineering-diy-cdc-pipeline-from-mysql-to-snowflake-32c14b705cfe
+
 # from pymysqlreplication           import BinLogStreamReader
 # from pymysqlreplication.event     import QueryEvent
 from pymysqlreplication.row_event import DeleteRowsEvent, UpdateRowsEvent, WriteRowsEvent
