@@ -207,3 +207,27 @@ print(Deck())
 # compare: Include the field in comparison ? (default=True)
 # hash: Include the field when calculating hash()
 # metadata: A mapping with information about the field
+
+
+# In the Position example, we saw how to add simple default values by writing lat: float = 0.0.
+# However, if you also want to customize the field, for instance to hid it in the repr, you need
+# to use the default parameter: lat: float = field(default=0.0, repr=False) you many not specify
+# both default and default_factory.
+
+# The metadata parameter is not used by the data classes themselves but is available for you
+# (or third party packages) to attach information to fields. In the Position example, you  could
+# instance specify that latitude and longitude should be given in degrees.
+print(f'{"Working with fields":=^50}')
+
+@dataclass
+class Position:
+    name: str
+    lon: float = field(default=0.0, metadata={'unit': 'degrees'})
+    lat: float = field(default=0.0, metadata={'unit': 'degrees'})
+
+# The metadata (and other information about a field) can be retrieved using the fields()
+# function (not the plural s)
+from dataclasses import fields
+print(fields(Position))
+lat_unit = fields(Position)[2].metadata['unit']
+print(lat_unit)
