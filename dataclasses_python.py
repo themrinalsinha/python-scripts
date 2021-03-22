@@ -267,3 +267,33 @@ print(cap)
 # NOTE: Things gets a little more complicated if any fields in the class have default values
 # The code will crash immediately with a TypeError complaining that 'non-default' argument
 # country follows default argument.
+
+
+print(f'{"Optimizing the data classes":=^50}')
+
+@dataclass
+class SimplePosition:
+    name: str
+    lon: str
+    lat: float
+
+@dataclass
+class SlotPosition:
+    __slots__ = ['name', 'lon', 'lat']
+    name: str
+    lon: str
+    lat: str
+
+# Essentially, slots are defined using .__slots__ to list the variables on a class.
+# variables or attributes not presnet in .__slots__ may not be defined. furthermore, a
+# slots class may not have default values
+
+# The benefits of adding such restrictions is that certain optimizations may be done.
+# for instance, a slots classes take up less memory, as ce be measured using pympler
+
+# NOTE: install pympler - pip install pympler
+# from pympler import asizeof
+
+# simple = SimplePosition('London', -0.1, 51.5)
+# slot = SlotPosition('Madrid', -3.5, 40.4)
+# print(asizeof.asizesof(simple, slot))
