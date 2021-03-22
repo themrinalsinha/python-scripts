@@ -157,3 +157,53 @@ two_cards = Deck([qoh, aos])
 print(qoh)
 print(aos)
 print(two_cards)
+
+
+print(f'{"Advance default feature":=^50}')
+"""
+Say that you want to give a default value to a Deck. It would for example be convenient
+if Deck() created a regular french deck of 52 playing cards.
+"""
+RANKS = '2 3 4 5 6 7 8 9 10 J Q K A'.split()
+SUITS = 'H C S A'.split()
+
+def make_french_deck():
+    return [PlayingCard(r, s) for s in SUITS for r in RANKS]
+print(make_french_deck())
+
+# Now, In theory, you could now use this function to specify a default value of Deck.cards
+"""
+@dataclass
+class Deck: # will NOT work
+    cards: List[PlayingCard] = make_french_deck()
+
+Don't do this! It introduces one of the most common anti-patterns in Python: using mutable default
+arguments. The problem is that all instance of Deck will use the same list object as the default
+value of the .card property. This means that if, say, one card is removed from one Deck, then it
+disappears from all the other instances of Deck as well.
+
+Actually, data classes try to prevent you from doing this, and the code above will raise a valueError
+Instead, data classes use something called a default_factory to handle mutable default values. To use
+default_factory(and many other cool features of data classes), you need to use the field() specifier
+"""
+from typing      import List
+from dataclasses import dataclass, field
+
+@dataclass
+class Deck:
+    cards: List[PlayingCard] = field(default_factory=make_french_deck)
+# NOTE: The argument of default_factory can be any zero parameter callable. Now it is easy to
+#       create a full deck of playing cards
+print(Deck())
+
+
+# The field() specifier is used to customize each field of a data class individually. You will see
+# some other examples later. For reference, these are the parameters field() supports:
+
+# default: Default value of the field
+# default_factory: Function that returns the initial value of the field
+# init - use field in .__init__() method? (default=True)
+# repr: Use field in repr of the object? (default=True)
+# compare: Include the field in comparison ? (default=True)
+# hash: Include the field when calculating hash()
+# metadata: A mapping with information about the field
