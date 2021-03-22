@@ -231,3 +231,19 @@ from dataclasses import fields
 print(fields(Position))
 lat_unit = fields(Position)[2].metadata['unit']
 print(lat_unit)
+
+
+print(f'{"Immutable data classes":=^50}')
+
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class Position:
+    name: str
+    lon: float=0.0
+    lat: float=0.0
+
+pos = Position('Oslo', 10.8, 59.9)
+print(pos)
+print(pos.name)
+pos.name = 'Mrinal'
