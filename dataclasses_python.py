@@ -246,4 +246,24 @@ class Position:
 pos = Position('Oslo', 10.8, 59.9)
 print(pos)
 print(pos.name)
-pos.name = 'Mrinal'
+# pos.name = 'Mrinal' # will not work...
+
+
+print(f'{"Inheritance":=^50}')
+
+@dataclass
+class Position:
+    name: str
+    lon: float
+    lat: float
+
+@dataclass
+class Capital(Position):
+    country: str
+
+cap = Capital('oslo', 10.0, 58.9, 'Norway')
+print(cap)
+
+# NOTE: Things gets a little more complicated if any fields in the class have default values
+# The code will crash immediately with a TypeError complaining that 'non-default' argument
+# country follows default argument.
