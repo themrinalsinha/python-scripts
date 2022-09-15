@@ -1,0 +1,11 @@
+--2022-09-15 23:06:58--  https://raw.githubusercontent.com/intel/S0ixSelftestTool/main/s0ix-selftest-tool.sh
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.111.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 53609 (52K) [text/plain]
+Saving to: ‘STDOUT’
+
+-                                                      0%[                                                                                                                      ]       0  --.-KB/s               -                                                     67%[==============================================================================>                                       ]  35.36K  --.-KB/s    in 0.007s  
+
+
+Cannot write to ‘-’ (Success).
