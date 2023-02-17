@@ -15,11 +15,11 @@ items = [1, 2, 3, 4, 5]
 # 15
 # to do this using reduce function.
 # reduce(function, iterable, initializer)
-sum = reduce(lambda x, y: x + y, items)
+sum_1 = reduce(lambda x, y: x + y, items)
 max = reduce(lambda x, y: max(x, y), items)
 # NOTE: if you don't provide initializer, it will take first element as initializer.
 _sum = reduce(lambda x, y: x + y, items, 10) # with initializer
-print(sum, max, _sum)
+print(sum_1, max, _sum)
 
 # ======================================================================================
 
@@ -94,5 +94,58 @@ print(c1 >= c2) # it will automatically implement this function.
 
 # PS: In order to use this decorator, you must implement __eq__ and __lt__ or __gt__.
 
+
+# ======================================================================================
+
+# Working with property and cached_property
+# property is used to create a property of a class. It allows you to treat your class
+# methods as class attributes.
+
+class Marksheet:
+    def __init__(self, *grades) -> None:
+        self.grades = grades
+
+    @property
+    def total(self):
+        print("Calculating total...")
+        return sum(self.grades)
+
+    @property
+    def average(self):
+        print("Calculating average...")
+        return self.total / len(self.grades)
+
+m = Marksheet(10, 20, 30, 40, 50)
+print(m.grades)
+print(m.total)
+print(m.average)
+
+# Now, if we try to access the total or average property multiple times, it will
+# calculate the total and average multiple times.
+# To avoid this, we can use cached_property from functools.
+
+from functools import cached_property
+
+class Marksheet:
+    def __init__(self, *grades) -> None:
+        self.grades = grades
+
+    @cached_property
+    def total(self):
+        print("Calculating total...")
+        return sum(self.grades)
+
+    @cached_property
+    def average(self):
+        print("Calculating average...")
+        return self.total / len(self.grades)
+
+m = Marksheet(10, 20, 30, 40, 50)
+print("[CP]: ", m.total)
+print("[CP]: ", m.average)
+
+# Now, if we try to access the total or average property multiple times, it will
+# calculate the total and average only once.
+# It will store the value in cache and will return the value from cache if we try to access it again.
 
 # ======================================================================================
