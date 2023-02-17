@@ -268,3 +268,75 @@ print(add.__name__)
 print(add.__doc__)
 print()
 # ======================================================================================
+
+# working with singledispatch from functools
+# singledispatch is used to create a generic function.
+# It will create a generic function that can be used with different types of arguments.
+# It will create a registry of different types of arguments and will call the appropriate function based on the type of the argument.
+
+# without singledispatch example
+
+def append_one(obj):
+    if type(obj) == list:
+        return obj + [1]
+    elif type(obj) == str:
+        return obj + "1"
+    elif type(obj) == int:
+        return obj + 1
+    elif type(obj) == dict:
+        obj.update({"1": 1})
+        return obj
+    elif type(obj) == set:
+        return obj.union({1})
+    else:
+        raise TypeError(f"Type {type(obj)} not supported")
+
+print("Without singledispatch and a func with a lot of if else")
+print(append_one([2, 3]))
+print(append_one({2, 3}))
+print(append_one({2: 2, 3: 3}))
+print(append_one("abc"))
+print(append_one(10))
+
+# with singledispatch: now we'll try to create generic function
+# GENERIC FUNCTION: A function that can be used with different types of arguments.
+# single dispatch: A form of generic function where the implementation is chosen based on the type of the first argument.
+# example:
+# [1, 2, 3, 4] -> [1, 2, 3, 4, 1]
+# {2, 3, 4, 5} -> {1, 2, 3, 4, 5}
+# {2: 2, 3: 3} -> {2: 2, 3: 3, "1": 1}
+# "abc" -> "abc1"
+
+from functools import singledispatch
+
+@singledispatch
+def append_one(obj):
+    raise NotImplementedError("Unsupported type")
+
+@append_one.register(list)
+def _(obj):
+    return obj + [1]
+
+@append_one.register(set)
+def _(obj):
+    return obj.union({1})
+
+@append_one.register(dict)
+def _(obj):
+    obj.update({"1": 1})
+    return obj
+
+@append_one.register(str)
+def _(obj):
+    return obj + "1"
+
+@append_one.register(int)
+def _(obj):
+    return obj + 1
+
+print("With singledispatch")
+print(append_one([2, 3]))
+print(append_one({2, 3}))
+print(append_one({2: 2, 3: 3}))
+print(append_one("abc"))
+print(append_one(10))
