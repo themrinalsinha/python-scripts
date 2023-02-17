@@ -188,3 +188,39 @@ print(fib.cache_info())
 # NOTE: typed=True is optional. It will cache the value based on the type of the arguments.
 print()
 # ======================================================================================
+
+# working with partial function from functools
+# partial function is used to create a new function from an existing function.
+# It will create a new function with the same name and docstring of the existing function.
+# It will also copy the argument names of the existing function.
+# It will also copy the annotations of the existing function.
+
+def add(a, b):
+    return a + b
+
+print(add(10, 20))
+# Now, if you want to pass only one argument to the add function
+# you can do something like
+def add_one(a):
+    return add(a, 1)
+
+print(add_one(10))
+
+# The same thing can be done using partial function.
+
+from functools import partial
+
+add_one = partial(add, 10)
+print(add_one(12))
+
+add_two = partial(add, b=2)
+print(add_two(10))
+
+# *** IMPORTANT ***
+# pass default value for a
+add_x = partial(add, a=11)
+# add_x(12) ## will raise error, because we are trying to pass two values for a.
+print(add_x(b=12))
+print()
+# ======================================================================================
+
