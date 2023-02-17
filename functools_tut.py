@@ -22,3 +22,77 @@ _sum = reduce(lambda x, y: x + y, items, 10) # with initializer
 print(sum, max, _sum)
 
 # ======================================================================================
+
+# Magic functions for comparison
+# __eq__ for ==
+# __ne__ for !=
+# __lt__ for <
+# __le__ for <=
+# __gt__ for >
+# __ge__ for >=
+
+class Car:
+    def __init__(self, model, mileage) -> None:
+        self.model = model
+        self.mileage = mileage
+
+    def __eq__(self, __o: object) -> bool:
+        return self.mileage == __o.mileage
+
+    def __lt__(self, __o: object) -> bool:
+        return self.mileage < __o.mileage
+
+    def __gt__(self, __o: object) -> bool:
+        return self.mileage > __o.mileage
+
+c1 = Car('BMW', 100)
+c2 = Car('Audi', 200)
+
+print(c1 == c2)
+print(c1 < c2)
+print(c1 > c2)
+
+# We have implemented a basic class that have 3 magic functions for comparison.
+# Now we can use these functions to compare the objects of this class.
+
+# Now, our func doesn't support __le__ or __ge__ so if we try to compare using these functions
+# it will throw an error.
+# print(c1 <= c2) # TypeError: '<=' not supported between instances of 'Car' and 'Car'
+# print(c1 >= c2) # TypeError: '>=' not supported between instances of 'Car' and 'Car'
+# To solve this problem we can use functools.total_ordering decorator.
+
+
+from functools import total_ordering
+
+@total_ordering
+class Car:
+    def __init__(self, model, mileage) -> None:
+        self.model = model
+        self.mileage = mileage
+
+    def __eq__(self, __o: object) -> bool:
+        return self.mileage == __o.mileage
+
+    def __lt__(self, __o: object) -> bool:
+        return self.mileage < __o.mileage
+
+    def __gt__(self, __o: object) -> bool:
+        return self.mileage > __o.mileage
+
+# NOW, we can compare using all the comparison operators. (<=, >=)
+# This decorator will automatically implement the missing comparison operators.
+# It will check if __eq__ is implemented, if not it will raise an error.
+
+c1 = Car('BMW', 100)
+c2 = Car('Audi', 200)
+
+print(c1 == c2)
+print(c1 < c2)
+print(c1 > c2)
+print(c1 <= c2) # it will automatically implement this function.
+print(c1 >= c2) # it will automatically implement this function.
+
+# PS: In order to use this decorator, you must implement __eq__ and __lt__ or __gt__.
+
+
+# ======================================================================================
