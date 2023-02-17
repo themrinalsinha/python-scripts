@@ -147,5 +147,44 @@ print("[CP]: ", m.average)
 # Now, if we try to access the total or average property multiple times, it will
 # calculate the total and average only once.
 # It will store the value in cache and will return the value from cache if we try to access it again.
+print("\n")
+# ======================================================================================
 
+# Working with lru_cache
+# lru_cache is used to cache the return value of a function.
+# It will store the return value of a function and will return the value from cache if we try to call the function again.
+
+# without lru_cache
+def fib(n):
+    if n < 2:
+        return n
+    print(f"Calculating fib({n})")
+    return fib(n - 1) + fib(n - 2)
+print("Without lru_cache")
+print([fib(x) for x in range(10)])
+
+
+# with lru_cache
+from functools import lru_cache
+
+@lru_cache(maxsize=1000) ## maxsize is optional (it means how many values you want to store in cache)
+def fib(n):
+    if n < 2:
+        return n
+    print(f"Calculating fib({n})")
+    return fib(n - 1) + fib(n - 2)
+
+print("With lru_cache")
+print([fib(x) for x in range(10)])
+
+# You can see the detail of lru_cache using <function_name>.cache_info()
+print(fib.cache_info())
+# CacheInfo(hits=28, misses=10, maxsize=1000, currsize=10)
+# hits: number of times the value was returned from cache.
+# misses: number of times the value was calculated.
+# maxsize: maxsize of the cache.
+# currsize: current size of the cache.
+
+# NOTE: typed=True is optional. It will cache the value based on the type of the arguments.
+print()
 # ======================================================================================
