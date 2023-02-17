@@ -224,3 +224,47 @@ print(add_x(b=12))
 print()
 # ======================================================================================
 
+# working with wraps from functools
+# wraps is used to copy the metadata of a function to another function.
+# It will copy the name, docstring, argument names, annotations of the function.
+
+def mylogger(func):
+    def wrapper(*args, **kwargs):
+        print(f"Executing {func.__name__}")
+        return func(*args, **kwargs)
+    return wrapper
+
+@mylogger
+def add(a, b):
+    """This function adds two numbers"""
+    return a + b
+
+print("without wraps")
+print(add(10, 20))
+print(add.__name__)
+print(add.__doc__)
+print()
+# Now, if you want to copy the metadata of the add function to the wrapper function
+# you can do something like
+
+from functools import wraps
+
+def mylogger(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        """This is a wrapper function"""
+        print(f"Executing {func.__name__}")
+        return func(*args, **kwargs)
+    return wrapper
+
+@mylogger
+def add(a, b):
+    """This function adds two numbers"""
+    return a + b
+
+print("with wraps")
+print(add(10, 20))
+print(add.__name__)
+print(add.__doc__)
+print()
+# ======================================================================================
